@@ -1,0 +1,188 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"  
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc     
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-3.2.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       
+       http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd
+       "
+        >
+        
+        
+    <!--  <import resource="dao/Spring-DAO.xml"/>   
+       <import resource="common/Spring-Common.xml"/> -->
+        
+    <!-- Spring 3 : non vi è piu' la parte di HandlerMapping che risolveva un url in un Controller --> 
+    <!-- Spring 3 : è tutto sul singolo Controller con annotation -->    
+     <util:properties id="configuration" location="#{systemProperties.CONFIGURATION_PATH}" />
+	  
+	
+    
+  <!--   
+    <bean id="dao" class="it.altran.springmvc.myApp.dao.PubblicazioneDAO"/>
+	
+	<bean class="it.altran.springmvc.myApp.dao.PropertiesTable" />
+	 <bean id="configurationProperties" class="it.altran.springmvc.myApp.util.ConfigurationProperties" />
+        <bean class="it.altran.springmvc.myApp.controller.WelcomeController" >
+       
+         </bean>
+         <bean class="it.altran.springmvc.myApp.controller.PrepareSearchController" />
+         <bean class="it.altran.springmvc.myApp.controller.SearchController" >
+         
+         </bean>
+         
+          <bean class="it.altran.springmvc.myApp.controller.SearchAuthorController" />
+          <bean class="it.altran.springmvc.myApp.controller.PrepareSearchAuthor" />
+          
+           -->
+    <context:component-scan base-package="it.altran.springmvc.myApp.util" />
+ 	<context:component-scan base-package="it.altran.springmvc.myApp.dao" />
+	<context:component-scan base-package="it.altran.springmvc.myApp.controller" /> 
+	
+ <context:annotation-config /> 
+	
+	
+	<!-- Registrare i bean non necessario se c'e' il context:component-scan : la riga sotto non serve per nessun controller-->
+	<!-- <bean class="it.altran.springmvc.myApp.controller.WelcomeController" /> -->
+	
+	
+	
+	<!-- 
+	<bean class="it.altran.springmvc.myApp.dao.AuthorDAO" />
+	
+	<bean id="userDetailsServiceDAO" class="it.altran.springmvc.myApp.dao.security.UserDetailsServiceDAO" />
+	 -->
+	
+	<!-- tutti i request con /resource/ vanno nella cartella nella root / -->
+	<!-- nota in:  Properties/Deploymnet Assembly ho settato src/main/resources/ alla root '/' -->
+	<mvc:annotation-driven />
+	 <mvc:resources mapping="/resources/**" location="/" />   
+	
+	
+	<!-- caricamento file di PROPERTIES -->
+	<!-- va aggiunto all'intestazione xmlns:util="http://www.springframework.org/schema/util" 
+	  e nello schemaLocation :  
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+	-->
+	<!-- 
+	 <util:properties id="configuration" location="file:C:\software\configuration.properties" />
+	  -->
+<!-- 	 <util:properties id="configuration" location="#{systemProperties.CONFIGURATION_PATH}" />
+	  
+	 <bean class="it.altran.springmvc.myApp.util.ConfigurationProperties" />
+	
+	-->
+	
+	<!-- resolver: dai controller alle jsp -->
+	
+	
+	<!--commento questo resolver per usare i tiles -->
+	<!--  
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	-->
+	
+	<!-- annotation-driven configura le transazioni per ogni bean con @Transactional -->
+	<!--  <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />  -->
+
+<!-- 
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	 <property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+ -->	
+ 
+ 
+ 	<!-- ################################à -->
+	<!-- START config JTA entity manger -->
+	<!-- spostata nella parte comune di application Context: devo lasciare tx:annotation-driven  -->
+
+
+	<tx:annotation-driven />
+	<!-- 	 
+	 <tx:jta-transaction-manager/>
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+	</bean>
+ 	-->
+	 
+	<!-- END config JTA entity manger -->
+	<!-- ################################à -->
+	
+	
+	<!-- 
+	<tx:annotation-driven />
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	 <property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+	</bean>
+	 -->
+	
+	
+	<!-- <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager" >
+	</bean> -->
+
+	
+	<!-- <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/> -->
+	<!--  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" />     -->
+	 
+	 
+ 	
+ 	<!--<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
+ 	<property name="persistenceUnitName" value="jpa-example" />
+ 	
+ 	 <property name="jpaProperties">
+ 		<props>
+ 		<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+ 		</props>
+ 	</property>  -->
+ 	
+	
+	
+	<!-- Fondamentale per permettere l'uso del @Secured di spring security -->
+	<security:global-method-security secured-annotations="enabled" />
+	
+	
+	
+	
+	<!-- configurazione tiles -->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+	   <property name="definitions">
+	     <list>
+	       <value>/WEB-INF/tiles.xml</value>
+	     </list>
+	   </property>
+	 </bean>
+	 	  
+	 <!-- resolver configurato per tiles -->
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	   <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+	 </bean> 
+	
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
+	<property name="basename" value="messages"/>
+	</bean>
+	
+	
+ 
+</beans>

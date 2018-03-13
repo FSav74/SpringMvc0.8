@@ -1,0 +1,46 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+ 
+ 
+   <!--  <beans:import resource="dao/Spring-DAO.xml"/>   -->
+ 
+    <http pattern="/login.do" security="none"/>
+	<http auto-config="true">
+		<intercept-url pattern="/*.do" access="ROLE_USER" />
+		
+		
+		
+		<form-login 
+		    login-page="/login.do" 
+		    default-target-url="/welcome.do" 
+			authentication-failure-url="/login.do?error=Invalid%20User%20or%20password" 
+			username-parameter="username"
+			password-parameter="password" />
+		<logout logout-success-url="/login?logout"  />
+	</http> 
+ 
+ <!-- SENZA PASSWORD CRYPTATE 
+	<authentication-manager>
+	  <authentication-provider user-service-ref="userDetailsServiceDAO" />
+	</authentication-manager>
+	-->
+	
+	<!-- START PARTE PASSWORD CRYPTATE -->
+	<authentication-manager>
+	  <authentication-provider ref="myProvider" />
+	</authentication-manager>
+	
+	<beans:bean id="myProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+	<beans:property name="userDetailsService" ref="userDetailsServiceDAO"/>
+	<beans:property name="passwordEncoder" ref="encoder"/>
+	</beans:bean>
+	
+	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+ 
+</beans:beans>

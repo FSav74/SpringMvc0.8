@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	  
+	   
+	<tiles-definitions>
+	  
+	 <definition name="baseLayout" template="/WEB-INF/pages/Layout/layout.jsp">
+	  <put-attribute name="title" value="Title layout" />
+	  <put-attribute name="header" value="/WEB-INF/pages/Layout/header.jsp" />
+	  <put-attribute name="navigation" value="/WEB-INF/pages/Layout/navigation.jsp" />
+	  <put-attribute name="body" value="" />
+	  <put-attribute name="footer" value="/WEB-INF/pages/Layout/footer.jsp" />
+	 </definition>
+	 
+	 <definition name="baseLayoutPopUp" template="/WEB-INF/pages/Layout/PopUp/layout.jsp">
+	  <put-attribute name="title" value="Title layout" />
+	  <put-attribute name="header" value="/WEB-INF/pages/Layout/PopUp/header.jsp" />
+	  <put-attribute name="body" value="" />
+	  <put-attribute name="footer" value="/WEB-INF/pages/Layout/PopUp/footer.jsp" />
+	 </definition>
+	   
+	 <definition name="loginLayout" template="/WEB-INF/pages/Layout/PopUp/layout.jsp">
+	  <put-attribute name="title" value="Login" />
+	  <put-attribute name="header" value="/WEB-INF/pages/Layout/header.jsp" />
+	  <put-attribute name="body" value="" />
+	   <put-attribute name="footer" value="/WEB-INF/pages/Layout/footer.jsp" />
+	 </definition>
+	 
+	 
+	 
+	 <definition name="login" extends="loginLayout">
+	  <put-attribute name="title" value="Login" />
+	  <put-attribute name="body" value="/login.jsp" />
+	 </definition>
+	 
+	 <definition name="error" extends="loginLayout">
+	  <put-attribute name="title" value="ERROR" />
+	  <put-attribute name="body" value="/error.jsp" />
+	 </definition>
+	 
+	    
+	<!-- Per ogni pagina   -->
+	 <definition name="welcome" extends="baseLayout">
+	  <put-attribute name="title" value="Welcomeee!!!! :-)" />
+	  <put-attribute name="body" value="/WEB-INF/pages/welcome.jsp" />
+	 </definition>
+	 
+	 <definition name="search" extends="baseLayout">
+	  <put-attribute name="title" value="Search pubblication" />
+	  <put-attribute name="body" value="/WEB-INF/pages/search.jsp" />
+	 </definition>
+	 
+	  <definition name="resultsearch" extends="baseLayout">
+	  <put-attribute name="title" value="Search pubblication" />
+	  <put-attribute name="body" value="/WEB-INF/pages/resultsearch.jsp" />
+	 </definition>
+	 
+	  <definition name="insert" extends="baseLayout">
+	  <put-attribute name="title" value="Insert pubblication" />
+	  <put-attribute name="body" value="/WEB-INF/pages/insert.jsp" />
+	 </definition>
+	   <definition name="insert2" extends="baseLayout">
+	  <put-attribute name="title" value="Insert pubblication" />
+	  <put-attribute name="body" value="/WEB-INF/pages/insert2.jsp" />
+	 </definition>
+	 
+	 <definition name="searchAuthorPopUp" extends="baseLayoutPopUp">
+	  <put-attribute name="title" value="Insert pubblication" />
+	  <put-attribute name="body" value="/WEB-INF/pages/searchAuthorPopUp.jsp" />
+	 </definition>
+	  <definition name="riassuntoInserimento" extends="baseLayout">
+	  <put-attribute name="title" value="Riassunto pubblication" />
+	  <put-attribute name="body" value="/WEB-INF/pages/riassuntoInserimento.jsp" />
+	 </definition>
+	  <definition name="riassuntoInserimento2" extends="baseLayout">
+	  <put-attribute name="title" value="Riassunto pubblication" />
+	  <put-attribute name="body" value="/WEB-INF/pages/riassuntoInserimento2.jsp" />
+	 </definition>
+
+	<definition name="admin" extends="baseLayout">
+	  <put-attribute name="title" value="Admin!!" />
+	  <put-attribute name="body" value="/WEB-INF/pages/admin.jsp" />
+	 </definition>
+
+	 <definition name="adminInsertClient" extends="baseLayout">
+	  <put-attribute name="title" value="Admin!!" />
+	  <put-attribute name="body" value="/WEB-INF/pages/admin/insertClient.jsp" />
+	 </definition>
+	 
+	 <definition name="insertedClientPage" extends="baseLayout">
+	  <put-attribute name="title" value="Client Inserted!!" />
+	  <put-attribute name="body" value="/WEB-INF/pages/admin/riassuntoInsCliente.jsp" />
+	 </definition>
+	    
+	    
+	    
+	    
+	</tiles-definitions>

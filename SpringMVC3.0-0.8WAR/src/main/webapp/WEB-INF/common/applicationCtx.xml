@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	 xmlns:tx="http://www.springframework.org/schema/tx"  
+	 xmlns:security="http://www.springframework.org/schema/security" 
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc     
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       
+       http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd"
+       
+        >
+        
+	<!--  -->
+	
+	
+	<tx:annotation-driven />
+	 <tx:jta-transaction-manager/>
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+	</bean>
+
+<!--	
+  <security:http pattern="/login.do" security="none"/>
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/*.do" access="ROLE_USER" />
+		
+		
+		
+		<security:form-login 
+		    login-page="/login.do" 
+		    default-target-url="/welcome.do" 
+			authentication-failure-url="/login.do?error=Invalid%20User%20or%20password" 
+			username-parameter="username"
+			password-parameter="password" />
+		<security:logout logout-success-url="/login?logout"  />
+	</security:http> 
+ 
+ -->
+    <!-- SENZA PASSWORD CRYPTATE 
+	<authentication-manager>
+	  <authentication-provider user-service-ref="userDetailsServiceDAO" />
+	</authentication-manager>
+	-->
+	
+	<!-- START PARTE PASSWORD CRYPTATE -->
+<!-- 	
+	
+	<security:authentication-manager>
+	  <security:authentication-provider ref="myProvider" />
+	</security:authentication-manager>
+	
+
+	 <context:annotation-config /> 
+	<bean id="userDetailsServiceDAO" class="it.altran.springmvc.myApp.security.UserDetailsServiceDAO" />
+ 
+	
+	<bean id="myProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+	<property name="userDetailsService" ref="userDetailsServiceDAO"/>
+	<property name="passwordEncoder" ref="encoder"/>
+	</bean>
+	
+	
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+-->	
+	
+</beans>

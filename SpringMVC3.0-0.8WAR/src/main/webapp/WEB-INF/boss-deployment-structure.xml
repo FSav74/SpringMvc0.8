@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<jboss-deployment-structure>
+   <deployment>
+     <exclusions>
+
+<!-- File necessario per conflitto tra il mio log4j e quello di JBOSS -->
+
+       		<module name="org.apache.log4j"/>  
+            <module name="org.slf4j" />  
+            <module name="org.apache.commons.logging"/>  
+            <module name="org.log4j"/>    
+            <module name="org.jboss.logging"/>   
+     </exclusions>
+   </deployment>
+ </jboss-deployment-structure> 

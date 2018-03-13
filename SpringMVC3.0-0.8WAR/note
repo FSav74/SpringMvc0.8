@@ -1,0 +1,6 @@
+//Entry point
+http://localhost:9080/SpringMVC3.0-0.8WAR-1.0-SNAPSHOT/index.do
+
+// it id possible to permit the url 
+// http://localhost:9080/SpringMVC3.0-0.8WAR-1.0-SNAPSHOT
+// without no jsp and put a default page
